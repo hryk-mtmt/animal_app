@@ -2,7 +2,8 @@ from torchvision import transforms
 import pytorch_lightning as pl
 import torch.nn as nn
 
-from torchvision.models import resnet18
+from torchvision.models import resnet18, ResNet18_Weights
+
 
 # 前処理
 '''
@@ -39,12 +40,12 @@ class Net(pl.LightningModule):
         h = self.fc(h)
         return h
 '''
-
 class Net(nn.Module):  #ResNet
     def __init__(self):
         super(Net, self).__init__()
         # 事前学習済みのResNet18モデルをロード
-        self.resnet = resnet18(pretrained=True)
+        #self.resnet = resnet18(pretrained=True)    #非推奨
+        self.resnet = resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)
         # 最後の全結合層(fc)を変更
         self.resnet.fc = nn.Linear(in_features=self.resnet.fc.in_features, out_features=2)
 

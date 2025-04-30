@@ -22,6 +22,8 @@ def getName(label):
         return '猫'
     elif label==1:
         return '犬'
+    else:
+        return '？'
 
 app = Flask(__name__)
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'gif', 'jpeg'])
@@ -55,11 +57,13 @@ def predicts():
             pred = predict(image)
             animalName_ = getName(pred)
             return render_template('result.html', animalName=animalName_, image=base64_data)
-        #return redirect(request.url)
-
+        else:
+            return redirect(request.url)
     # GET メソッドの定義
     elif request.method == 'GET':
         return render_template('index.html')
+    else:
+        return redirect(request.url)
 
 # アプリケーションの実行の定義
 if __name__ == '__main__':
