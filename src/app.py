@@ -55,7 +55,7 @@ def predicts():
             pred = predict(image)
             animalName_ = getName(pred)
             return render_template('result.html', animalName=animalName_, image=base64_data)
-        return redirect(request.url)
+        #return redirect(request.url)
 
     # GET メソッドの定義
     elif request.method == 'GET':
