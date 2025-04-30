@@ -8,7 +8,8 @@ import base64
 def predict(img):
     net=Net().cpu().eval()
     # 学習済みモデルの重みを読み込む
-    net.load_state_dict(torch.load('./src/ResNet_dog_cat.pt', map_location=torch.device('cpu')))
+    #net.load_state_dict(torch.load('./src/ResNet_dog_cat.pt', map_location=torch.device('cpu')))
+    net.load_state_dict(torch.load('./ResNet_dog_cat.pt', map_location=torch.device('cpu')))  #Deployのため修正
     #前処理
     img=transform(img)
     img=img.unsqueeze(0) #1次元増やす
